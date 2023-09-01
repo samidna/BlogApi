@@ -1,3 +1,8 @@
+C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.AssemblyInfo.cs
+C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.csproj.CoreCompileInputs.cache
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.Business.deps.json
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.Business.dll
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.Business.pdb
@@ -5,11 +10,6 @@ C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.Core.dll
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.DAL.dll
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.DAL.pdb
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\bin\Debug\net6.0\BlogApp.Core.pdb
-C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.csproj.AssemblyReference.cache
-C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.AssemblyInfoInputs.cache
-C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.AssemblyInfo.cs
-C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.csproj.CoreCompileInputs.cache
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.csproj.CopyComplete
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\BlogApp.Business.dll
 C:\Users\hp\Desktop\BlogApp\BlogApp.Business\obj\Debug\net6.0\refint\BlogApp.Business.dll
