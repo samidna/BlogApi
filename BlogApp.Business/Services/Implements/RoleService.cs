@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using BlogApp.Business.Dtos.RoleDtos;
-using BlogApp.Business.Exceptions.RoleExceptions;
+﻿using BlogApp.Business.Exceptions.Common;
+using BlogApp.Business.Exceptions.Role;
 using BlogApp.Business.Services.Interfaces;
-using BlogApp.DAL.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,37 +8,74 @@ namespace BlogApp.Business.Services.Implements;
 
 public class RoleService : IRoleService
 {
-    readonly AppDbContext _context;
     readonly RoleManager<IdentityRole> _roleManager;
-    readonly IMapper _mapper;
-    public RoleService(RoleManager<IdentityRole> roleManager, IMapper mapper, AppDbContext context)
+
+    public RoleService(RoleManager<IdentityRole> roleManager)
     {
-        _roleManager = roleManager;
-        _mapper=mapper;
-        _context=context;
+        _roleManager=roleManager;
     }
 
-    public async Task CreateRole(RoleCreateDto dto)
+    public async Task CreateAsync(string name)
     {
-        IdentityRole identityRole = new()
+        if (await _roleManager.RoleExistsAsync(name)) throw new RoleExistException();
+        var result = await _roleManager.CreateAsync(new IdentityRole
         {
-            Name=dto.Name
-        };
-        await _roleManager.CreateAsync(identityRole);
+            Name = name
+        });
+        if (!result.Succeeded)
+        {
+            string a = "";
+            foreach (var error in result.Errors)
+            {
+                a += error.Description + " ";
+            }
+            throw new RoleCreateFailedException(a);
+        }
+
     }
 
-    public async Task DeleteRole(RoleDeleteDto dto)
+    public async Task<IEnumerable<IdentityRole>> GetAllAsync()
     {
-        var entity = await _roleManager.Roles.SingleOrDefaultAsync(c => c.Name == dto.Name);
-        if (entity == null) throw new RoleNotFoundException();
-        await _roleManager.DeleteAsync(entity);
+        return await _roleManager.Roles.ToListAsync();
     }
 
-    public async Task UpdateRole(string oldRoleName, string newRoleName)
+    public async Task<string> GetByIdAsync(string id)
     {
-        var entity = _roleManager.Roles.SingleOrDefault(c => c.Name == oldRoleName);
-        if (entity == null) throw new RoleNotFoundException();
-        entity.Name = newRoleName;
-        await _context.SaveChangesAsync();
+        var role = await _roleManager.FindByIdAsync(id);
+        if (role == null) throw new NotFoundException<IdentityRole>();
+        return role.Name;
+    }
+
+    public async Task RemoveAsync(string id)
+    {
+        var role = await _roleManager.FindByIdAsync(id);
+        if (role == null) throw new NotFoundException<IdentityRole>();
+        var result = await _roleManager.DeleteAsync(role);
+        if (!result.Succeeded)
+        {
+            string a = "";
+            foreach (var errors in result.Errors)
+            {
+                a += errors.Description + " ";
+            }
+            throw new RoleDeleteFailedException(a);
+        }
+    }
+
+    public async Task UpdateAsync(string id, string name)
+    {
+        var role = await _roleManager.FindByIdAsync(id);
+        if (role == null) throw new NotFoundException<IdentityRole>();
+        role.Name = name;
+        var result = await _roleManager.UpdateAsync(role);
+        if (!result.Succeeded)
+        {
+            string a = "";
+            foreach (var errors in result.Errors)
+            {
+                a += errors.Description + " ";
+            }
+            throw new RoleUpdateFailedException(a);
+        }
     }
 }

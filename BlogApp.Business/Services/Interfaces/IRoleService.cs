@@ -1,11 +1,13 @@
-﻿using BlogApp.Business.Dtos.RoleDtos;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace BlogApp.Business.Services.Interfaces
 {
     public interface IRoleService
     {
-        Task CreateRole(RoleCreateDto dto);
-        Task UpdateRole(string oldRoleName,string newRoleName);
-        Task DeleteRole(RoleDeleteDto dto);
+        Task<IEnumerable<IdentityRole>> GetAllAsync();
+        Task<string> GetByIdAsync(string id);
+        Task CreateAsync(string name);
+        Task UpdateAsync(string id,string name);
+        Task RemoveAsync(string id);
     }
 }

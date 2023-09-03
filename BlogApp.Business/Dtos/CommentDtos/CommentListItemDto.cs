@@ -9,6 +9,6 @@ public record CommentListItemDto
     public string Text { get; set; }
     public AuthorDto AppUser { get; set; }
     public DateTime CreatedDate { get; set; }
-    public IEnumerable<CommentChildDto> Children { get; set; }
+    public IEnumerable<CommentListItemDto> Children { get; set; }
 
 }

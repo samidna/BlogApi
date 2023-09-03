@@ -1,5 +1,6 @@
 ﻿using BlogApp.Business.Dtos.UserDtos;
 using BlogApp.Business.ExternalServices.Interfaces;
+using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,10 +13,11 @@ namespace BlogApp.Business.ExternalServices.Implements;
 public class TokenService : ITokenService
 {
     readonly IConfiguration _config;
-
-    public TokenService(IConfiguration config)
+    readonly IRoleService _roleService;
+    public TokenService(IConfiguration config, IRoleService roleService)
     {
         _config=config;
+        _roleService=roleService;
     }
 
     public TokenResponseDto CreateToken(AppUser user, int expires = 60)
@@ -28,6 +30,10 @@ public class TokenService : ITokenService
             new Claim(ClaimTypes.GivenName, user.Name),
             new Claim(ClaimTypes.Surname, user.Surname),
         };
+        foreach (var userRole in _roleService.GetAllAsync().Result)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, userRole.Name));
+        }
         SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]));
         SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
         JwtSecurityToken jwtSecurityToken = new(

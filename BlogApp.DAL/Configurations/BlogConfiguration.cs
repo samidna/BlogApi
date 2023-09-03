@@ -16,7 +16,7 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
         builder.Property(b => b.CoverImageUrl)
             .IsRequired();
         builder.Property(b => b.CreatedAt)
-            .HasDefaultValue(DateTime.UtcNow);
+            .HasDefaultValueSql("getutcdate()");
         builder.Property(b => b.ViewerCount)
             .HasDefaultValue(0);
         builder.HasOne(b => b.AppUser)

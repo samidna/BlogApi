@@ -18,6 +18,7 @@ namespace BlogApp.Core.Entities
         public AppUser AppUser { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
         public IEnumerable<BlogCategory> BlogCategories { get; set; }
+        public ICollection<BlogLike> BlogLikes { get; set; }
 
     }
 }

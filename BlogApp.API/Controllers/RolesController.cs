@@ -1,5 +1,4 @@
-﻿using BlogApp.Business.Dtos.RoleDtos;
-using BlogApp.Business.Services.Interfaces;
+﻿using BlogApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,22 +16,32 @@ namespace BlogApp.API.Controllers
             _roleService=roleService;
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> Create(RoleCreateDto dto)
+        public async Task<IActionResult> Post(string name)
         {
-            await _roleService.CreateRole(dto);
-            return Ok();
+            await _roleService.CreateAsync(name);
+            return StatusCode(StatusCodes.Status201Created);
         }
-        [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(RoleDeleteDto dto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
         {
-            await _roleService.DeleteRole(dto);
-            return Ok();
+            return Ok(await _roleService.GetByIdAsync(id));
         }
-        [HttpPut("[action]")]
-        public async Task<IActionResult> Update(string oldRoleName,string newRoleName)
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            await _roleService.UpdateRole(oldRoleName,newRoleName);
-            return Ok();
+            return Ok(await _roleService.GetAllAsync());
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _roleService.RemoveAsync(id);
+            return StatusCode(StatusCodes.Status204NoContent);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Put(string id,string name)
+        {
+            await _roleService.UpdateAsync(id, name);
+            return StatusCode(StatusCodes.Status204NoContent);
         }
     }
 }

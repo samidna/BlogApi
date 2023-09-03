@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogApp.Business.Dtos.BlogDtos;
+using BlogApp.Business.Dtos.BlogLikeDtos;
 using BlogApp.Business.Dtos.CategoryDtos;
 using BlogApp.Core.Entities;
 
@@ -13,5 +14,7 @@ public class BlogMappingProfile : Profile
         CreateMap<Blog, BlogDetailDto>();
         CreateMap<BlogUpdateDto, Blog>();
         CreateMap<BlogCreateDto, Blog>();
+        CreateMap<BlogCategory, BlogCategoryDto>().ReverseMap();
+        CreateMap<BlogLikeListItemDto, BlogLike>().ReverseMap();
     }
 }

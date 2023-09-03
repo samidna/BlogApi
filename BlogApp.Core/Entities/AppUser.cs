@@ -9,5 +9,6 @@ public class AppUser : IdentityUser
     public string? ImageUrl { get; set; }
     public IEnumerable<Blog> Blogs { get; set; }
     public IEnumerable<Comment> Comments { get; set; }
+    public IEnumerable<BlogLike> BlogLikes { get; set; }
 
 }

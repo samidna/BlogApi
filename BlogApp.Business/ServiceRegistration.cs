@@ -18,6 +18,7 @@ namespace BlogApp.Business
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IBlogService, BlogService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddHttpContextAccessor();
         }
     }

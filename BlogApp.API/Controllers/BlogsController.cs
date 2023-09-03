@@ -1,6 +1,7 @@
 ﻿using BlogApp.Business.Dtos.BlogDtos;
 using BlogApp.Business.Dtos.CommentDtos;
 using BlogApp.Business.Services.Interfaces;
+using BlogApp.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,10 +50,22 @@ namespace BlogApp.API.Controllers
             await _blogService.RemoveAsync(id);
             return Ok();
         }
-        [HttpPost("{id}")]
+        [HttpPost("[action]/{id}")]
         public async Task<IActionResult> Comment(int id,CommentCreateDto dto)
         {
             await _commentService.CreateAsync(id,dto);
+            return StatusCode(StatusCodes.Status202Accepted);
+        }
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> React(int id, Reactions reaction)
+        {
+            await _blogService.ReactAsync(id, reaction);
+            return StatusCode(StatusCodes.Status202Accepted);
+        }
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            await _blogService.RemoveReactAsync(id);
             return StatusCode(StatusCodes.Status202Accepted);
         }
     }
